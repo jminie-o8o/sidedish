@@ -1,9 +1,6 @@
 package com.example.sidedish.network
 
-import com.example.sidedish.model.MenuData
-import com.example.sidedish.model.PostRequest
-import com.example.sidedish.model.Error
-import com.example.sidedish.model.ProductDetail
+import com.example.sidedish.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -28,4 +25,12 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("orders")
     suspend fun orderProduct(@Body postRequest: PostRequest): Response<Error>
+
+    @Headers("Content-Type: application/json")
+    @FormUrlEncoded
+    @POST("Login")
+    suspend fun getToken(
+        @Field("userID") userID: String,
+        @Field("userPw") userPw: String
+    ): Response<AccessToken>
 }
